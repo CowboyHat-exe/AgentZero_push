@@ -1,0 +1,39 @@
+name: Agent Zero CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_NAME: agentzero
+      CI_MODE: true
+      AUTO_DOCKER: true
+      AUTO_DEPLOY: true
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Make Repair Script Executable
+        run: chmod +x master_repair_vfinal+.sh
+
+      - name: Run Master Repair vFinal+
+        run: ./master_repair_vfinal+.sh
+
+      - name: Upload Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agentzero-report
+          path: report_*.md

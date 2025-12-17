@@ -1,0 +1,34 @@
+# Environment & Secrets
+.env
+.env.local
+*-keys.sh
+
+# Agent Zero Installation
+agent-zero/
+venv/
+.venv/
+
+# Logs & Artifacts
+*.log
+*.old
+report_*.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+dist/
+build/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
